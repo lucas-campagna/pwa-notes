@@ -1,0 +1,42 @@
+.note{
+    background-color: hsl(60, 100%, 87%);
+    padding: 5px 10px;
+    color: rgb(90, 90, 90);
+    flex: 1;
+    cursor: text;
+    border: none;
+    resize: none;
+    outline:none;
+}
+
+.addNote{
+    display: table;
+    color: rgba(90, 90, 90, 25%);
+    font-weight: 300;
+    font-size: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+.addNotePlus{
+    transform: translateY(-9%);
+}
+
+.noteRoot,.addNote{
+    background-color: hsl(60, 100%, 87%);
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+    width: 150px;
+    height: 150px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+}
+
+.noteHeader{
+    display: flex;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
+}
