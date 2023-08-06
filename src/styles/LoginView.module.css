@@ -26,11 +26,12 @@
 .loginBoxActionButtons{
     display: flex;
     justify-content: space-evenly;
+    gap: 20px;
 }
 
 .logonSpace{
     position: absolute;
-    bottom: 5%;
+    bottom: 8%;
     left: 50%;
     transform: translateX(-50%);
     text-align: right;
