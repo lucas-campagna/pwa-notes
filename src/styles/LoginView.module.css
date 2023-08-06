@@ -1,0 +1,42 @@
+.root{
+    background-color: hsl(60, 100%, 95%);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginBox{
+    background-color: hsl(60, 100%, 87%);
+    padding: 10px 20px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.loginBoxFields{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 20px;
+}
+
+.loginBoxActionButtons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.logonSpace{
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: right;
+    font-size: 0.8rem;
+}
+.logonButton{
+    color: lightskyblue;
+    cursor: pointer;
+}

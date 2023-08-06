@@ -1,4 +1,4 @@
-import styles from '../../styles/Note.module.css';
+import styles from '../styles/Note.module.css';
 
 export function Note({text, setText, date, editable, id, onBlur, onClose}) {
     return (
