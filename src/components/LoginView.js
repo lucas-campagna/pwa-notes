@@ -10,18 +10,24 @@ export default function LoginView() {
     const loginDisabled = name === '' || password === '';
 
     function handleLogin(){
+        console.log('handleLogin')
         login(name, password)
-        // .catch();
+        .then(token=>console.log('login successfully done ' + token))
+        .catch(error => console.log(error))
     }
     function handleCreateAccount(){
+        console.log('handleCreateAccount')
         createAccount(name, password)
-        .catch();
+        .then(()=>handleCancelCreateAccount())
+        .catch(error=>console.log(error));
     }
     function handleCancelCreateAccount(){
+        console.log('handleCancelCreateAccount')
         setIsCreatingAccount(false);
         clearInputs();
     }
     function handleGoToCreateAccount(){
+        console.log('handleGoToCreateAccount')
         setIsCreatingAccount(true);
         clearInputs();
     }
@@ -42,11 +48,11 @@ export default function LoginView() {
                 {
                     isCreatingAccount?
                     <>
-                        <input type="button" value="Logon" disabled={loginDisabled}/>
+                        <input type="button" value="Create" disabled={loginDisabled} onClick={handleCreateAccount}/>
                         <input type="button" value="Cancel" onClick={handleCancelCreateAccount}/>
                     </>
                     :
-                    <input type="button" value="Login" disabled={loginDisabled} onClick={isCreatingAccount?handleCreateAccount():handleLogin()}/>
+                    <input type="button" value="Login" disabled={loginDisabled} onClick={handleLogin}/>
                 }
                 </div>
             </div>
