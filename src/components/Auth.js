@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react'
 
-const AuthContext = createContext()
+export const AuthContext = createContext()
 
 export default function Auth({login, children}) {
     const [user, setUser] = useState(null);

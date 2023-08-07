@@ -1,14 +1,22 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from '../styles/LoginView.module.css'
+import {AuthContext} from './Auth'
 
 export default function LoginView() {
+    const {login, createAccount} = useContext(AuthContext);
     const [isCreatingAccount, setIsCreatingAccount] = useState(false);
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const loginDisabled = name === '' || password === '';
 
-    function handleLogin(){}
-    function handleCreateAccount(){}
+    function handleLogin(){
+        login(name, password)
+        // .catch();
+    }
+    function handleCreateAccount(){
+        createAccount(name, password)
+        .catch();
+    }
     function handleCancelCreateAccount(){
         setIsCreatingAccount(false);
         clearInputs();
