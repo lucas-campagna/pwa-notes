@@ -1,5 +1,4 @@
 .root{
-    background-color: hsl(60, 100%, 95%);
     width: 100vw;
     height: 100vh;
 }
@@ -7,9 +6,23 @@
 .header{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     padding: 5px 10%;
     background-color: hsl(60, 100%, 87%);
     box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+    font-size: 0.85rem;
+    font-weight: 300;
+}
+
+.welcome{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.welcomeName{
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
 .body{
@@ -28,4 +41,8 @@
         align-items: center;
     }
     
+}
+
+.headerLogout{
+    cursor: pointer;
 }

@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react'
 import styles from '../styles/LoginView.module.css'
 import {AuthContext} from './Auth'
+import {AlertsContext} from './Alerts'
 
 export default function LoginView() {
+    const {pushAlert} = useContext(AlertsContext);
     const {login, createAccount} = useContext(AuthContext);
     const [isCreatingAccount, setIsCreatingAccount] = useState(false);
     const [name, setName] = useState('');
@@ -10,19 +12,25 @@ export default function LoginView() {
     const loginDisabled = name === '' || password === '';
 
     function handleLogin(){
-        console.log('handleLogin')
         login(name, password)
-        .then(token=>console.log('login successfully done ' + token))
-        .catch(error => console.log(error))
+        .then(resp => {
+            if(!resp){
+                pushAlert("Wrong name or password", 2);
+                clearInputs();
+            }
+        })
     }
     function handleCreateAccount(){
-        console.log('handleCreateAccount')
         createAccount(name, password)
-        .then(()=>handleCancelCreateAccount())
-        .catch(error=>console.log(error));
+        .then(()=>{
+            setIsCreatingAccount(false);
+            clearInputs();
+        })
+        .catch((e)=>{
+            pushAlert("Username already used " + JSON.stringify(e), 2);
+        });
     }
     function handleCancelCreateAccount(){
-        console.log('handleCancelCreateAccount')
         setIsCreatingAccount(false);
         clearInputs();
     }

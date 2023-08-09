@@ -1,73 +1,49 @@
-import { useState, useRef } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import styles from '../styles/MainView.module.css';
 import {Note, AddNote} from './Note';
-import { idGenerator } from '../utils';
-// import { get } from './hooks/db';
-
-const defaultNotes = [
-  {text: "nota nota nota", date: '2020-01-01', id:"1"},
-  {text: "nota2 bla bla bla", date: '2020-01-01', id:"2"},
-];
+import { AlertsContext } from './Alerts';
+import { AuthContext } from './Auth';
 
 export default function MainView() {
-  const usuario = "Lucas";
-  const [notes, setNotes] = useState(defaultNotes);
+  const { user, logout } = useContext(AuthContext);
 
-  function handleSetText(id, txt){
-    setNotes(notes.map(note=>note.id === id? {...note, text:txt}: note))
+  const notes = user.useNotes(n=>n.toArray())
+  
+  async function handleAddNote(){
+    user.addNote();
   }
-
-  function handleNewNote(){
-    if(notes.length === 0){
-      setNotes([
-        {text: "", date: '2021-01-02', id: idGenerator()}
-      ])
-    }else{
-      if(notes.at(-1).text !== ''){
-        setNotes([
-          ...notes,
-          {text: "", date: '2021-01-02', id: idGenerator()}
-        ])
-      }
-      else{
-        setNotes([
-          ...notes.slice(0,-1),
-          {text: "", date: '2021-01-02', id: idGenerator()}
-        ])
-      }
-    }
-  }
-
   function handleOnBlur(id, txt){
     if(txt === '')
-      setNotes([
-        ...notes.filter(note=>note.id !== id)
-      ])
+      handleDeleteNote(id)
   }
-
-  function handleOnClose(id){
-    setNotes([
-      ...notes.filter(note=>note.id !== id)
-    ])
+  function handleDeleteNote(id){
+    user.deleteNote(id)
   }
-  
+  function handleUpdateNote(id, text){
+    user.updateNote(id, text)
+  }
   return (
     <div className={styles.root}>
       <div className={styles.header}>
-        {`Olá, ${usuario}`}
+        <div className={styles.welcome}>
+          {`Welcome, ${user.name}!`}
+        </div>
+        <div className={styles.headerLogout} onClick={logout}>
+          logout
+        </div>
       </div>
       <div className={styles.body}>
-        {notes.map(({id, ...noteParams},i)=>
+        {notes?.map(({id, ...noteParams},i)=>
           <div key={id}>
             <Note
             {...noteParams}
-            setText={txt=>handleSetText(id, txt)}
+            setText={txt=>handleUpdateNote(id, txt)}
             onBlur={txt=>handleOnBlur(id, txt)}
-            onClose={()=>handleOnClose(id)}
+            onClose={()=>handleDeleteNote(id)}
             />
           </div>
         )}
-        <AddNote onClick={handleNewNote}/>
+        <AddNote onClick={handleAddNote}/>
       </div>
     </div>
   );
