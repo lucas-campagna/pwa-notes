@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import styles from '../styles/MainView.module.css';
 import {Note, AddNote} from './Note';
 import { AlertsContext } from './Alerts';
@@ -7,7 +7,7 @@ import { AuthContext } from './Auth';
 export default function MainView() {
   const { user, logout } = useContext(AuthContext);
 
-  const notes = user.useNotes(n=>n.toArray())
+  const notes = user.useNotes()
   
   async function handleAddNote(){
     user.addNote();
