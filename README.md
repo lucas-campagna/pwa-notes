@@ -32,4 +32,4 @@ The proposal is to develop a simple note-taking Progressive Web App (PWA).
     - [x] delete a note
 - [x] Implement authentication with login
 - [x] Encrypt notes table
-- [ ] convert into PWA using Workbox
+- [x] convert into PWA using Workbox
